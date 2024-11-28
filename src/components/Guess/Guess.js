@@ -1,14 +1,19 @@
 import React from 'react';
 import { range }  from '../../utils';
+import { checkGuess }  from '../../game-helpers';
 
-function Guess({ children }) {
+
+function Guess({ children, answer }) {
+  const classResolver = (row, col) => {
+    if (!children[row]) return 'cell'
+    const resolvedArr = checkGuess(children[row], answer)
+    return `cell ${resolvedArr[col].status}`
+  }
   const evaluatedRow = (row) => range(5).map((col) => {
-    return (<span key={crypto.randomUUID()} className="cell">
+    return (<span key={crypto.randomUUID()} className={classResolver(row, col)}>
       {(children[row] ? children[row][col] : null)}
     </span>)
   })
-  console.log(children);
-  console.log(children.length)
   return <>
     <div className="guess-results">
       {

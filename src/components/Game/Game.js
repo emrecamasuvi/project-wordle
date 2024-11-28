@@ -30,7 +30,7 @@ function Game() {
   };
   return (
     <>
-      <Guess children={guess} />
+      <Guess answer={answer} children={guess} />
       <form onSubmit={submission} className="guess-input-wrapper">
         <label htmlFor="guess-input">Enter guess: {word}</label>
         <input
